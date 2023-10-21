@@ -10,9 +10,7 @@ export const transactionDetailMachine = dataMachine("transactionData").withConfi
       const payload = omit("type", event);
       const contextTransactionId = !isEmpty(ctx.results) && first(ctx.results)["id"];
       const transactionId = contextTransactionId || payload.transactionId;
-      const resp = await httpClient.get(
-        `https://appqa.vercel.app/transactions/${transactionId}`
-      );
+      const resp = await httpClient.get(`https://appqa.vercel.app/transactions/${transactionId}`);
       // @ts-ignore
       return { results: [resp.data.transaction] };
     },
